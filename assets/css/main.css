@@ -2276,30 +2276,34 @@ button,
   margin-top: 2em; /* Add space above the section */
   text-align: center; /* Center-align content */
 }
-/* Styling for the video containers */
-.video-container {
+
+#my-video-section video {
+  max-width: 100%; /* Ensure video scales within the layout */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Center the video block */
+  margin: 0 auto; /* Add space below the video */
+}
+
+#my-video-section h2 {
+  margin-bottom: 1em; /* Space between header and video */
+  font-size: 1.5em; /* Adjust header font size */
+}
+
+/* Ensure videos fit the same size as images */
+span.video.fit video {
+    max-width: 100%; /* Fit the container width */
+    height: auto; /* Maintain the aspect ratio */
     display: block;
-    width: 100%; /* Matches the width of the image container */
-    max-width: 500px; /* Set a maximum width */
-    margin: 0 auto; /* Center-align the videos */
+    margin: 0 auto; /* Center the video */
 }
 
-/* Ensure videos resize proportionally */
-.video-container video {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 5px; /* Match the image styling */
+/* Consistent spacing for video sections */
+section {
+    margin-bottom: 2em; /* Adjust spacing below each section */
 }
 
-/* Title and description alignment */
-.video-title, .video-description {
-    text-align: center; /* Match the text alignment of the images */
-    margin-top: 0.5em;
-}
-
-/* Ensure 'More' button stays below */
-.video-container .actions {
-    text-align: center;
-    margin-top: 1em;
+/* Optional: If the gray divider is a CSS border */
+section + section {
+    border-top: 1px solid #ddd; /* Adjust based on your existing style */
+    padding-top: 1em; /* Add spacing above the divider */
 }
