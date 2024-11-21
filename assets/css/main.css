@@ -2289,3 +2289,21 @@ button,
   font-size: 1.5em; /* Adjust header font size */
 }
 
+/* Ensure videos fit the same size as images */
+span.video.fit video {
+    max-width: 100%; /* Fit the container width */
+    height: auto; /* Maintain the aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the video */
+}
+
+/* Consistent spacing for video sections */
+section {
+    margin-bottom: 2em; /* Adjust spacing below each section */
+}
+
+/* Optional: If the gray divider is a CSS border */
+section + section {
+    border-top: 1px solid #ddd; /* Adjust based on your existing style */
+    padding-top: 1em; /* Add spacing above the divider */
+}
