@@ -2271,3 +2271,21 @@ button,
     border-top: 0;
     margin-top: 0;
     padding-top: 0; }
+/* Custom styles for the video section */
+#my-video-section {
+  margin-top: 2em; /* Add space above the section */
+  text-align: center; /* Center-align content */
+}
+
+#my-video-section video {
+  max-width: 100%; /* Ensure video scales within the layout */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Center the video block */
+  margin: 0 auto; /* Add space below the video */
+}
+
+#my-video-section h2 {
+  margin-bottom: 1em; /* Space between header and video */
+  font-size: 1.5em; /* Adjust header font size */
+}
+
