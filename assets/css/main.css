@@ -2307,3 +2307,52 @@ section + section {
     border-top: 1px solid #ddd; /* Adjust based on your existing style */
     padding-top: 1em; /* Add spacing above the divider */
 }
+/* Custom styles for video alignment and sizing */
+.video.fit {
+    width: 100%; /* Make video containers stretch to their parent */
+    max-width: 100%; /* Prevent videos from exceeding parent container */
+    display: flex; /* Enable centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.video.fit video {
+    width: 100%; /* Ensure video fits the container */
+    max-width: 100%; /* Prevent video from overflowing */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Section adjustments for padding and alignment */
+section {
+    margin-bottom: 2em; /* Add space between sections */
+    padding: 1em 0; /* Adjust padding */
+    text-align: center; /* Center text and videos in sections */
+}
+
+/* Ensure consistent size for articles with videos */
+.posts article .image.fit video {
+    width: 100%; /* Stretch video to fit the image's width */
+    height: auto; /* Keep aspect ratio */
+}
+
+/* Specific padding adjustments for videos in posts */
+.posts article {
+    padding: 1em; /* Add padding around articles */
+}
+
+.posts .actions {
+    margin-top: 1em; /* Space below the video description */
+}
+
+/* Media queries for smaller screens */
+@media screen and (max-width: 768px) {
+    .video.fit video {
+        width: 90%; /* Slight reduction for smaller screens */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .video.fit video {
+        width: 100%; /* Full width for very small screens */
+    }
+}
