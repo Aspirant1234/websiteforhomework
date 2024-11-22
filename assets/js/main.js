@@ -259,19 +259,21 @@
 
 			});
 
-})(jQuery);
-// Lightbox functionality
 document.addEventListener('DOMContentLoaded', () => {
-    // Select all images and lightbox elements
-    const images = document.querySelectorAll('img'); // Target all images
+    const images = document.querySelectorAll('img'); // Select all images
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxClose = document.getElementById('lightbox-close');
 
+    if (!lightbox || !lightboxImage || !lightboxClose) {
+        console.error('Lightbox elements are missing in the HTML.');
+        return;
+    }
+
     // Open lightbox when an image is clicked
     images.forEach(image => {
         image.addEventListener('click', () => {
-            lightboxImage.src = image.src; // Set the lightbox image source
+            lightboxImage.src = image.src; // Set lightbox image source
             lightbox.style.display = 'flex'; // Show the lightbox
         });
     });
@@ -279,97 +281,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close lightbox when the close button is clicked
     lightboxClose.addEventListener('click', () => {
         lightbox.style.display = 'none'; // Hide the lightbox
+        lightboxImage.src = ''; // Clear the image source
     });
 
-    // Optional: Close lightbox when clicking outside the image
+    // Close lightbox when clicking outside the image
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) {
             lightbox.style.display = 'none';
-        }
-    });
-});
-document.addEventListener('DOMContentLoaded', () => {
-    const images = document.querySelectorAll('img');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-    const lightboxClose = document.getElementById('lightbox-close');
-
-    // Open lightbox
-    images.forEach(image => {
-        image.addEventListener('click', () => {
-            lightboxImage.src = image.src;
-            lightbox.style.display = 'flex';
-        });
-    });
-
-    // Close lightbox
-    lightboxClose.addEventListener('click', () => {
-        lightbox.style.display = 'none';
-    });
-
-    // Close when clicking outside the image
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            lightbox.style.display = 'none';
-        }
-    });
-});
-document.addEventListener('DOMContentLoaded', () => {
-    const images = document.querySelectorAll('img'); // Select all images
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-    const lightboxClose = document.getElementById('lightbox-close');
-
-    // Open lightbox
-    images.forEach(image => {
-        image.addEventListener('click', () => {
-            lightboxImage.src = image.src; // Set clicked image src
-            lightbox.classList.add('active'); // Show the lightbox
-        });
-    });
-
-    // Close lightbox
-    lightboxClose.addEventListener('click', () => {
-        lightbox.classList.remove('active'); // Hide the lightbox
-    });
-
-    // Optional: Close when clicking outside the image
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            lightbox.classList.remove('active');
-        }
-    });
-});
-document.addEventListener('DOMContentLoaded', () => {
-    const images = document.querySelectorAll('img'); // Select all images
-    const lightbox = document.createElement('div'); // Create the lightbox container
-    lightbox.classList.add('lightbox');
-    document.body.appendChild(lightbox);
-
-    const lightboxImage = document.createElement('img'); // Image inside the lightbox
-    lightbox.appendChild(lightboxImage);
-
-    const closeButton = document.createElement('span'); // Close button
-    closeButton.classList.add('close');
-    closeButton.innerHTML = '&times;'; // Close button icon
-    lightbox.appendChild(closeButton);
-
-    // Open lightbox when an image is clicked
-    images.forEach(image => {
-        image.addEventListener('click', () => {
-            lightboxImage.src = image.src; // Set lightbox image source
-            lightbox.classList.add('active');
-        });
-    });
-
-    // Close lightbox when clicking the close button or outside the image
-    closeButton.addEventListener('click', () => {
-        lightbox.classList.remove('active');
-    });
-
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            lightbox.classList.remove('active');
+            lightboxImage.src = ''; // Clear the image source
         }
     });
 });
