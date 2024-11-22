@@ -386,4 +386,44 @@ document.querySelectorAll("img").forEach((img) => {
         lightbox.classList.add("active");
     });
 });
+// Create the lightbox container
+const lightbox = document.createElement("div");
+lightbox.classList.add("lightbox");
+document.body.appendChild(lightbox);
+
+// Add a close button to the lightbox
+const closeButton = document.createElement("span");
+closeButton.classList.add("close");
+closeButton.innerHTML = "&times;";
+lightbox.appendChild(closeButton);
+
+// Event listener to close the lightbox
+closeButton.addEventListener("click", () => {
+    lightbox.classList.remove("active");
+});
+
+// Close the lightbox when clicking outside the image
+lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+        lightbox.classList.remove("active");
+    }
+});
+
+// Add click event to all images
+document.querySelectorAll("img").forEach((img) => {
+    img.addEventListener("click", () => {
+        console.log("Image clicked"); // Debugging
+        const lightboxImage = document.createElement("img");
+        lightboxImage.src = img.src;
+
+        // Clear any previous content
+        while (lightbox.childNodes.length > 1) {
+            lightbox.removeChild(lightbox.lastChild);
+        }
+
+        // Add the clicked image to the lightbox
+        lightbox.appendChild(lightboxImage);
+        lightbox.classList.add("active");
+    });
+});
 
