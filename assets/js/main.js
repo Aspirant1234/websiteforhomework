@@ -258,7 +258,6 @@
 				});
 
 			});
-
 // Create the lightbox container (only once)
 const lightbox = document.createElement("div");
 lightbox.classList.add("lightbox");
@@ -267,7 +266,7 @@ document.body.appendChild(lightbox);
 // Add a close button to the lightbox
 const closeButton = document.createElement("span");
 closeButton.classList.add("close");
-closeButton.innerHTML = "&times;";
+closeButton.innerHTML = "&times;"; // Close button text
 lightbox.appendChild(closeButton);
 
 // Event listener to close the lightbox
@@ -282,13 +281,13 @@ lightbox.addEventListener("click", (e) => {
     }
 });
 
-// Add click event to all images (no duplicate handlers)
+// Add click event to all images
 document.querySelectorAll("img").forEach((img) => {
     img.addEventListener("click", () => {
         const lightboxImage = document.createElement("img");
         lightboxImage.src = img.src;
 
-        // Clear any previous content in the lightbox
+        // Clear previous content in the lightbox
         while (lightbox.childNodes.length > 1) {
             lightbox.removeChild(lightbox.lastChild);
         }
@@ -298,3 +297,5 @@ document.querySelectorAll("img").forEach((img) => {
         lightbox.classList.add("active");
     });
 });
+
+console.log("main.js executed without issues"); // Debugging confirmation
