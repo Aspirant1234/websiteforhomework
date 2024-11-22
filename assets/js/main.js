@@ -260,3 +260,31 @@
 			});
 
 })(jQuery);
+// Lightbox functionality
+document.addEventListener('DOMContentLoaded', () => {
+    // Select all images and lightbox elements
+    const images = document.querySelectorAll('img'); // Target all images
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    // Open lightbox when an image is clicked
+    images.forEach(image => {
+        image.addEventListener('click', () => {
+            lightboxImage.src = image.src; // Set the lightbox image source
+            lightbox.style.display = 'flex'; // Show the lightbox
+        });
+    });
+
+    // Close lightbox when the close button is clicked
+    lightboxClose.addEventListener('click', () => {
+        lightbox.style.display = 'none'; // Hide the lightbox
+    });
+
+    // Optional: Close lightbox when clicking outside the image
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.style.display = 'none';
+        }
+    });
+});
