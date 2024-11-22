@@ -314,4 +314,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('img'); // Select all images
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    // Open lightbox
+    images.forEach(image => {
+        image.addEventListener('click', () => {
+            lightboxImage.src = image.src; // Set clicked image src
+            lightbox.classList.add('active'); // Show the lightbox
+        });
+    });
+
+    // Close lightbox
+    lightboxClose.addEventListener('click', () => {
+        lightbox.classList.remove('active'); // Hide the lightbox
+    });
+
+    // Optional: Close when clicking outside the image
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
+        }
+    });
+});
 
