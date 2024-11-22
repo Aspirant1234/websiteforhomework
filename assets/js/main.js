@@ -23,102 +23,268 @@
 		});
 
 	// Stops animations/transitions until the page has ...
-	$window.on('load', function() {
-		window.setTimeout(function() {
-			$body.removeClass('is-preload');
-		}, 100);
-	});
 
-	var resizeTimeout;
+		// ... loaded.
+			$window.on('load', function() {
+				window.setTimeout(function() {
+					$body.removeClass('is-preload');
+				}, 100);
+			});
 
-	$window.on('resize', function() {
-		$body.addClass('is-resizing');
+		// ... stopped resizing.
+			var resizeTimeout;
 
-		clearTimeout(resizeTimeout);
+			$window.on('resize', function() {
 
-		resizeTimeout = setTimeout(function() {
-			$body.removeClass('is-resizing');
-		}, 100);
-	});
+				// Mark as resizing.
+					$body.addClass('is-resizing');
 
-	// Sidebar setup.
-	var $sidebar = $('#sidebar'),
-		$sidebar_inner = $sidebar.children('.inner');
+				// Unmark after delay.
+					clearTimeout(resizeTimeout);
 
-	// Inactive sidebar for smaller screens.
-	breakpoints.on('<=large', function() {
-		$sidebar.addClass('inactive');
-	});
+					resizeTimeout = setTimeout(function() {
+						$body.removeClass('is-resizing');
+					}, 100);
 
-	breakpoints.on('>large', function() {
-		$sidebar.removeClass('inactive');
-	});
+			});
 
-	// Sidebar toggle behavior.
-	$('<a href="#sidebar" class="toggle">Toggle</a>')
-		.appendTo($sidebar)
-		.on('click', function(event) {
-			event.preventDefault();
-			event.stopPropagation();
+	// Fixes.
 
-			$sidebar.toggleClass('inactive');
-		});
+		// Object fit images.
+			if (!browser.canUse('object-fit')
+			||	browser.name == 'safari')
+				$('.image.object').each(function() {
 
-	// Menu openers.
-	var $menu = $('#menu'),
-		$menu_openers = $menu.children('ul').find('.opener');
+					var $this = $(this),
+						$img = $this.children('img');
 
-	$menu_openers.each(function() {
-		var $this = $(this);
+					// Hide original image.
+						$img.css('opacity', '0');
 
-		$this.on('click', function(event) {
-			event.preventDefault();
+					// Set background.
+						$this
+							.css('background-image', 'url("' + $img.attr('src') + '")')
+							.css('background-size', $img.css('object-fit') ? $img.css('object-fit') : 'cover')
+							.css('background-position', $img.css('object-position') ? $img.css('object-position') : 'center');
 
-			$menu_openers.not($this).removeClass('active');
-			$this.toggleClass('active');
+				});
 
-			$window.triggerHandler('resize.sidebar-lock');
-		});
-	});
+	// Sidebar.
+		var $sidebar = $('#sidebar'),
+			$sidebar_inner = $sidebar.children('.inner');
+
+		// Inactive by default on <= large.
+			breakpoints.on('<=large', function() {
+				$sidebar.addClass('inactive');
+			});
+
+			breakpoints.on('>large', function() {
+				$sidebar.removeClass('inactive');
+			});
+
+		// Hack: Workaround for Chrome/Android scrollbar position bug.
+			if (browser.os == 'android'
+			&&	browser.name == 'chrome')
+				$('<style>#sidebar .inner::-webkit-scrollbar { display: none; }</style>')
+					.appendTo($head);
+
+		// Toggle.
+			$('<a href="#sidebar" class="toggle">Toggle</a>')
+				.appendTo($sidebar)
+				.on('click', function(event) {
+
+					// Prevent default.
+						event.preventDefault();
+						event.stopPropagation();
+
+					// Toggle.
+						$sidebar.toggleClass('inactive');
+
+				});
+
+		// Events.
+
+			// Link clicks.
+				$sidebar.on('click', 'a', function(event) {
+
+					// >large? Bail.
+						if (breakpoints.active('>large'))
+							return;
+
+					// Vars.
+						var $a = $(this),
+							href = $a.attr('href'),
+							target = $a.attr('target');
+
+					// Prevent default.
+						event.preventDefault();
+						event.stopPropagation();
+
+					// Check URL.
+						if (!href || href == '#' || href == '')
+							return;
+
+					// Hide sidebar.
+						$sidebar.addClass('inactive');
+
+					// Redirect to href.
+						setTimeout(function() {
+
+							if (target == '_blank')
+								window.open(href);
+							else
+								window.location.href = href;
+
+						}, 500);
+
+				});
+
+			// Prevent certain events inside the panel from bubbling.
+				$sidebar.on('click touchend touchstart touchmove', function(event) {
+
+					// >large? Bail.
+						if (breakpoints.active('>large'))
+							return;
+
+					// Prevent propagation.
+						event.stopPropagation();
+
+				});
+
+			// Hide panel on body click/tap.
+				$body.on('click touchend', function(event) {
+
+					// >large? Bail.
+						if (breakpoints.active('>large'))
+							return;
+
+					// Deactivate.
+						$sidebar.addClass('inactive');
+
+				});
+
+		// Scroll lock.
+		// Note: If you do anything to change the height of the sidebar's content, be sure to
+		// trigger 'resize.sidebar-lock' on $window so stuff doesn't get out of sync.
+
+			$window.on('load.sidebar-lock', function() {
+
+				var sh, wh, st;
+
+				// Reset scroll position to 0 if it's 1.
+					if ($window.scrollTop() == 1)
+						$window.scrollTop(0);
+
+				$window
+					.on('scroll.sidebar-lock', function() {
+
+						var x, y;
+
+						// <=large? Bail.
+							if (breakpoints.active('<=large')) {
+
+								$sidebar_inner
+									.data('locked', 0)
+									.css('position', '')
+									.css('top', '');
+
+								return;
+
+							}
+
+						// Calculate positions.
+							x = Math.max(sh - wh, 0);
+							y = Math.max(0, $window.scrollTop() - x);
+
+						// Lock/unlock.
+							if ($sidebar_inner.data('locked') == 1) {
+
+								if (y <= 0)
+									$sidebar_inner
+										.data('locked', 0)
+										.css('position', '')
+										.css('top', '');
+								else
+									$sidebar_inner
+										.css('top', -1 * x);
+
+							}
+							else {
+
+								if (y > 0)
+									$sidebar_inner
+										.data('locked', 1)
+										.css('position', 'fixed')
+										.css('top', -1 * x);
+
+							}
+
+					})
+					.on('resize.sidebar-lock', function() {
+
+						// Calculate heights.
+							wh = $window.height();
+							sh = $sidebar_inner.outerHeight() + 30;
+
+						// Trigger scroll.
+							$window.trigger('scroll.sidebar-lock');
+
+					})
+					.trigger('resize.sidebar-lock');
+
+				});
+
+	// Menu.
+		var $menu = $('#menu'),
+			$menu_openers = $menu.children('ul').find('.opener');
+
+		// Openers.
+			$menu_openers.each(function() {
+
+				var $this = $(this);
+
+				$this.on('click', function(event) {
+
+					// Prevent default.
+						event.preventDefault();
+
+					// Toggle.
+						$menu_openers.not($this).removeClass('active');
+						$this.toggleClass('active');
+
+					// Trigger resize (sidebar lock).
+						$window.triggerHandler('resize.sidebar-lock');
+
+				});
+
+			});
 
 })(jQuery);
+// Lightbox functionality
+document.addEventListener('DOMContentLoaded', () => {
+    // Select all images and lightbox elements
+    const images = document.querySelectorAll('img'); // Target all images
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.getElementById('lightbox-close');
 
-// Create the lightbox container
-const lightbox = document.createElement("div");
-lightbox.classList.add("lightbox");
-document.body.appendChild(lightbox);
+    // Open lightbox when an image is clicked
+    images.forEach(image => {
+        image.addEventListener('click', () => {
+            lightboxImage.src = image.src; // Set the lightbox image source
+            lightbox.style.display = 'flex'; // Show the lightbox
+        });
+    });
 
-// Add a close button to the lightbox
-const closeButton = document.createElement("span");
-closeButton.classList.add("close");
-closeButton.innerHTML = "&times;";
-lightbox.appendChild(closeButton);
+    // Close lightbox when the close button is clicked
+    lightboxClose.addEventListener('click', () => {
+        lightbox.style.display = 'none'; // Hide the lightbox
+    });
 
-// Close the lightbox when clicking outside the image or on the close button
-closeButton.addEventListener("click", () => {
-	lightbox.classList.remove("active");
+    // Optional: Close lightbox when clicking outside the image
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.style.display = 'none';
+        }
+    });
 });
-
-lightbox.addEventListener("click", (e) => {
-	if (e.target === lightbox) {
-		lightbox.classList.remove("active");
-	}
-});
-
-// Add event listeners to images to open them in the lightbox
-document.querySelectorAll("img").forEach((img) => {
-	img.addEventListener("click", () => {
-		const lightboxImage = document.createElement("img");
-		lightboxImage.src = img.src;
-
-		// Clear previous content in the lightbox
-		while (lightbox.childNodes.length > 1) {
-			lightbox.removeChild(lightbox.lastChild);
-		}
-
-		lightbox.appendChild(lightboxImage);
-		lightbox.classList.add("active");
-	});
-});
-
-console.log("main.js executed without issues"); // Debugging confirmation
