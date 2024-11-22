@@ -340,4 +340,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('img'); // Select all images
+    const lightbox = document.createElement('div'); // Create the lightbox container
+    lightbox.classList.add('lightbox');
+    document.body.appendChild(lightbox);
+
+    const lightboxImage = document.createElement('img'); // Image inside the lightbox
+    lightbox.appendChild(lightboxImage);
+
+    const closeButton = document.createElement('span'); // Close button
+    closeButton.classList.add('close');
+    closeButton.innerHTML = '&times;'; // Close button icon
+    lightbox.appendChild(closeButton);
+
+    // Open lightbox when an image is clicked
+    images.forEach(image => {
+        image.addEventListener('click', () => {
+            lightboxImage.src = image.src; // Set lightbox image source
+            lightbox.classList.add('active');
+        });
+    });
+
+    // Close lightbox when clicking the close button or outside the image
+    closeButton.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
+        }
+    });
+});
 
