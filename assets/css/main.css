@@ -2426,3 +2426,56 @@ section {
     cursor: pointer;
     user-select: none; /* Disable text selection */
 }
+#lightbox img {
+    max-width: none; /* Allow larger scaling */
+    max-height: none;
+    transform-origin: center; /* Zoom from the center */
+    cursor: grab; /* Indicate draggable content */
+    user-select: none; /* Prevent text/image selection */
+    position: relative; /* For pan functionality */
+}
+
+#lightbox img:active {
+    cursor: grabbing; /* Change cursor on drag */
+}
+#lightbox img {
+    max-width: none; /* Allow larger scaling */
+    max-height: none;
+    transform-origin: center; /* Zoom from the center */
+    cursor: grab; /* Indicate draggable content */
+    user-select: none; /* Prevent text/image selection */
+    position: relative; /* For pan functionality */
+}
+
+#lightbox img:active {
+    cursor: grabbing; /* Change cursor on drag */
+}
+
+.zoom-controls {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    gap: 10px;
+    z-index: 1001; /* Above the image */
+}
+
+.zoom-controls button {
+    font-size: 1em;
+    padding: 5px 10px;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+.zoom-controls button:hover {
+    background-color: white;
+    color: black;
+}
+
