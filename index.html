@@ -284,9 +284,34 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-<div id="lightbox" class="lightbox">
-    <span id="lightbox-close" class="close">&times;</span>
-    <img id="lightbox-image" src="" alt="Full view">
-</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('img'); // Select all images
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    // Open lightbox when an image is clicked
+    images.forEach(image => {
+        image.addEventListener('click', () => {
+            lightboxImage.src = image.src; // Set lightbox image source
+            lightbox.style.display = 'flex'; // Show the lightbox
+        });
+    });
+
+    // Close lightbox when the close button is clicked
+    lightboxClose.addEventListener('click', () => {
+        lightbox.style.display = 'none'; // Hide the lightbox
+    });
+
+    // Optional: Close lightbox when clicking outside the image
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.style.display = 'none';
+        }
+    });
+});
+</script>
+
 	</body>
 </html>
