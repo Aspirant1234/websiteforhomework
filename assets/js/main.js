@@ -259,6 +259,7 @@
 
 			});
 
+<script>
 document.addEventListener('DOMContentLoaded', () => {
     const images = document.querySelectorAll('img'); // Select all images
     const lightbox = document.getElementById('lightbox');
@@ -284,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lightboxImage.src = ''; // Clear the image source
     });
 
-    // Close lightbox when clicking outside the image
+    // Optional: Close lightbox when clicking outside the image
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) {
             lightbox.style.display = 'none';
@@ -292,4 +293,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+</script>
 
