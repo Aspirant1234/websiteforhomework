@@ -2426,56 +2426,74 @@ section {
     cursor: pointer;
     user-select: none; /* Disable text selection */
 }
-#lightbox img {
-    max-width: none; /* Allow larger scaling */
-    max-height: none;
-    transform-origin: center; /* Zoom from the center */
-    cursor: grab; /* Indicate draggable content */
-    user-select: none; /* Prevent text/image selection */
-    position: relative; /* For pan functionality */
-}
-
-#lightbox img:active {
-    cursor: grabbing; /* Change cursor on drag */
-}
-#lightbox img {
-    max-width: none; /* Allow larger scaling */
-    max-height: none;
-    transform-origin: center; /* Zoom from the center */
-    cursor: grab; /* Indicate draggable content */
-    user-select: none; /* Prevent text/image selection */
-    position: relative; /* For pan functionality */
-}
-
-#lightbox img:active {
-    cursor: grabbing; /* Change cursor on drag */
-}
-
-.zoom-controls {
+/* Lightbox styling for full-screen image */
+.lightbox img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
     position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    border-radius: 5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9); /* Dark background */
+    z-index: 1000; /* Make sure it stays on top */
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox.active {
     display: flex;
-    gap: 10px;
-    z-index: 1001; /* Above the image */
+}
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
 }
 
-.zoom-controls button {
-    font-size: 1em;
-    padding: 5px 10px;
+.lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border: 2px solid white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+.lightbox img:hover {
+    transform: scale(1.05);
+}
+
+.lightbox.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
     color: white;
-    background-color: transparent;
-    border: 1px solid white;
-    border-radius: 3px;
     cursor: pointer;
-    transition: background 0.2s ease-in-out;
 }
-
-.zoom-controls button:hover {
-    background-color: white;
-    color: black;
-}
-
