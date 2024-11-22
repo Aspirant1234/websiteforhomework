@@ -348,4 +348,42 @@ document.querySelectorAll("img").forEach((img) => {
         lightbox.classList.add("active");
     });
 });
+// Create a lightbox container
+const lightbox = document.createElement("div");
+lightbox.classList.add("lightbox");
+document.body.appendChild(lightbox);
+
+// Add close button to the lightbox
+const closeButton = document.createElement("span");
+closeButton.classList.add("close");
+closeButton.innerHTML = "&times;";
+lightbox.appendChild(closeButton);
+
+// Close lightbox on button click or background click
+closeButton.addEventListener("click", () => {
+    lightbox.classList.remove("active");
+});
+
+lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+        lightbox.classList.remove("active");
+    }
+});
+
+// Image click event to open in the lightbox
+document.querySelectorAll("img").forEach((img) => {
+    img.addEventListener("click", () => {
+        console.log("Image clicked"); // Debugging log
+        const lightboxImage = document.createElement("img");
+        lightboxImage.src = img.src;
+
+        // Clear previous content in the lightbox
+        while (lightbox.childNodes.length > 1) {
+            lightbox.removeChild(lightbox.lastChild);
+        }
+
+        lightbox.appendChild(lightboxImage);
+        lightbox.classList.add("active");
+    });
+});
 
