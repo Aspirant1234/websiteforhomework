@@ -2320,3 +2320,10 @@ section {
         width: 100%; /* Full width for very small screens */
     }
 }
+video {
+    max-width: 500px; /* Adjust based on design */
+    width: 100%; /* Scale to container */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Avoid inline spacing */
+    margin: 0 auto; /* Center the video */
+}
