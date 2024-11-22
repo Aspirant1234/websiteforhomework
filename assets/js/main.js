@@ -259,22 +259,19 @@
 
 			});
 
-<script>
+})(jQuery);
+// Lightbox functionality
 document.addEventListener('DOMContentLoaded', () => {
-    const images = document.querySelectorAll('img'); // Select all images
+    // Select all images and lightbox elements
+    const images = document.querySelectorAll('img'); // Target all images
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxClose = document.getElementById('lightbox-close');
 
-    if (!lightbox || !lightboxImage || !lightboxClose) {
-        console.error('Lightbox elements are missing in the HTML.');
-        return;
-    }
-
     // Open lightbox when an image is clicked
     images.forEach(image => {
         image.addEventListener('click', () => {
-            lightboxImage.src = image.src; // Set lightbox image source
+            lightboxImage.src = image.src; // Set the lightbox image source
             lightbox.style.display = 'flex'; // Show the lightbox
         });
     });
@@ -282,16 +279,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close lightbox when the close button is clicked
     lightboxClose.addEventListener('click', () => {
         lightbox.style.display = 'none'; // Hide the lightbox
-        lightboxImage.src = ''; // Clear the image source
     });
 
     // Optional: Close lightbox when clicking outside the image
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) {
             lightbox.style.display = 'none';
-            lightboxImage.src = ''; // Clear the image source
         }
     });
 });
-</script>
-
