@@ -2659,5 +2659,33 @@ section {
     border: none;
     z-index: 10000;
 }
+/* Lightbox styling */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
 
+.lightbox.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.lightbox img {
+    max-width: 90%; /* Prevents the image from being too wide */
+    max-height: 90%; /* Prevents the image from being too tall */
+    object-fit: contain; /* Preserves the aspect ratio */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional styling */
+    border-radius: 4px; /* Optional styling for rounded corners */
+}
 
