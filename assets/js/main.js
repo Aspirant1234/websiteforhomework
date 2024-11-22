@@ -348,3 +348,106 @@ document.querySelectorAll("img").forEach((img) => {
         lightbox.classList.add("active");
     });
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const zoomControls = document.createElement('div');
+
+    zoomControls.classList.add('zoom-controls');
+    zoomControls.innerHTML = `
+        <button id="zoom-in">Zoom In</button>
+        <button id="zoom-out">Zoom Out</button>
+        <button id="reset-zoom">Reset Zoom</button>
+    `;
+    lightbox.appendChild(zoomControls);
+
+    let scale = 1; // Track zoom level
+    let originX = 0, originY = 0; // Track image translation
+    let isDragging = false, startX = 0, startY = 0;
+
+    // Open lightbox
+    images.forEach(image => {
+        image.addEventListener('click', () => {
+            lightboxImage.src = image.src;
+            document.body.classList.add('no-scroll');
+            lightbox.style.display = 'flex';
+            resetZoom(); // Reset on opening
+        });
+    });
+
+    // Close lightbox
+    lightboxClose.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+        document.body.classList.remove('no-scroll');
+    });
+
+    // Close on background click
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.style.display = 'none';
+            document.body.classList.remove('no-scroll');
+        }
+    });
+
+    // Zoom In
+    document.getElementById('zoom-in').addEventListener('click', () => {
+        scale = Math.min(scale + 0.2, 5); // Cap zoom level
+        applyTransform();
+    });
+
+    // Zoom Out
+    document.getElementById('zoom-out').addEventListener('click', () => {
+        scale = Math.max(scale - 0.2, 1); // Minimum scale is 1
+        applyTransform();
+    });
+
+    // Reset Zoom
+    document.getElementById('reset-zoom').addEventListener('click', resetZoom);
+
+    function resetZoom() {
+        scale = 1;
+        originX = 0;
+        originY = 0;
+        applyTransform();
+    }
+
+    // Apply Transformations
+    function applyTransform() {
+        lightboxImage.style.transform = `scale(${scale}) translate(${originX}px, ${originY}px)`;
+    }
+
+    // Drag to Pan
+    lightboxImage.addEventListener('mousedown', (e) => {
+        if (scale === 1) return; // Only allow dragging when zoomed in
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        lightboxImage.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        originX += (e.clientX - startX) / scale;
+        originY += (e.clientY - startY) / scale;
+        startX = e.clientX;
+        startY = e.clientY;
+        applyTransform();
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        lightboxImage.style.cursor = 'grab';
+    });
+
+    // Zoom with Scroll (Desktop)
+    lightboxImage.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        scale += e.deltaY * -0.01;
+        scale = Math.min(Math.max(1, scale), 5); // Clamp scale between 1 and 5
+        applyTransform();
+    });
+});
+
+
