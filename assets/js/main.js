@@ -288,3 +288,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+// Select all images on the page
+const images = document.querySelectorAll("img");
+const lightbox = document.createElement("div");
+lightbox.classList.add("lightbox");
+document.body.appendChild(lightbox);
+
+// Add a click event listener to each image
+images.forEach((img) => {
+    img.addEventListener("click", () => {
+        lightbox.classList.add("active");
+        const lightboxImage = document.createElement("img");
+        lightboxImage.src = img.src; // Use the clicked image's source
+        while (lightbox.firstChild) {
+            lightbox.removeChild(lightbox.firstChild);
+        }
+        lightbox.appendChild(lightboxImage);
+    });
+});
+
+// Add a click event listener to close the lightbox
+lightbox.addEventListener("click", () => {
+    lightbox.classList.remove("active");
+});
+
