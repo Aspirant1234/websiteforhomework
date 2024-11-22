@@ -298,4 +298,4 @@ document.querySelectorAll("img").forEach((img) => {
     });
 });
 
-console.log("main.js executed without issues"); // Debugging confirmation
+	{console.log("main.js executed without issues");} // Debugging confirmation
