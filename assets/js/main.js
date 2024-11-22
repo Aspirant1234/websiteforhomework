@@ -1,187 +1,124 @@
 /*
-    Editorial by HTML5 UP
-    html5up.net | @ajlkn
-    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-(function ($) {
-    var $window = $(window),
-        $head = $('head'),
-        $body = $('body');
+(function($) {
 
-    // Breakpoints.
-    breakpoints({
-        xlarge: ['1281px', '1680px'],
-        large: ['981px', '1280px'],
-        medium: ['737px', '980px'],
-        small: ['481px', '736px'],
-        xsmall: ['361px', '480px'],
-        xxsmall: [null, '360px'],
-        'xlarge-to-max': '(min-width: 1681px)',
-        'small-to-xlarge': '(min-width: 481px) and (max-width: 1680px)',
-    });
+	var	$window = $(window),
+		$head = $('head'),
+		$body = $('body');
 
-    // Stops animations/transitions until the page has loaded.
-    $window.on('load', function () {
-        window.setTimeout(function () {
-            $body.removeClass('is-preload');
-        }, 100);
-    });
+	// Breakpoints.
+		breakpoints({
+			xlarge:   [ '1281px',  '1680px' ],
+			large:    [ '981px',   '1280px' ],
+			medium:   [ '737px',   '980px'  ],
+			small:    [ '481px',   '736px'  ],
+			xsmall:   [ '361px',   '480px'  ],
+			xxsmall:  [ null,      '360px'  ],
+			'xlarge-to-max':    '(min-width: 1681px)',
+			'small-to-xlarge':  '(min-width: 481px) and (max-width: 1680px)'
+		});
 
-    // Fixes for resizing.
-    var resizeTimeout;
+	// Stops animations/transitions until the page has ...
+	$window.on('load', function() {
+		window.setTimeout(function() {
+			$body.removeClass('is-preload');
+		}, 100);
+	});
 
-    $window.on('resize', function () {
-        $body.addClass('is-resizing');
+	var resizeTimeout;
 
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(function () {
-            $body.removeClass('is-resizing');
-        }, 100);
-    });
+	$window.on('resize', function() {
+		$body.addClass('is-resizing');
 
-    // Sidebar functionality.
-    var $sidebar = $('#sidebar'),
-        $sidebar_inner = $sidebar.children('.inner');
+		clearTimeout(resizeTimeout);
 
-    breakpoints.on('<=large', function () {
-        $sidebar.addClass('inactive');
-    });
+		resizeTimeout = setTimeout(function() {
+			$body.removeClass('is-resizing');
+		}, 100);
+	});
 
-    breakpoints.on('>large', function () {
-        $sidebar.removeClass('inactive');
-    });
+	// Sidebar setup.
+	var $sidebar = $('#sidebar'),
+		$sidebar_inner = $sidebar.children('.inner');
 
-    if (browser.os == 'android' && browser.name == 'chrome') {
-        $('<style>#sidebar .inner::-webkit-scrollbar { display: none; }</style>').appendTo($head);
-    }
+	// Inactive sidebar for smaller screens.
+	breakpoints.on('<=large', function() {
+		$sidebar.addClass('inactive');
+	});
 
-    $('<a href="#sidebar" class="toggle">Toggle</a>')
-        .appendTo($sidebar)
-        .on('click', function (event) {
-            event.preventDefault();
-            event.stopPropagation();
+	breakpoints.on('>large', function() {
+		$sidebar.removeClass('inactive');
+	});
 
-            $sidebar.toggleClass('inactive');
-        });
+	// Sidebar toggle behavior.
+	$('<a href="#sidebar" class="toggle">Toggle</a>')
+		.appendTo($sidebar)
+		.on('click', function(event) {
+			event.preventDefault();
+			event.stopPropagation();
 
-    $sidebar.on('click', 'a', function (event) {
-        if (breakpoints.active('>large')) return;
+			$sidebar.toggleClass('inactive');
+		});
 
-        var $a = $(this),
-            href = $a.attr('href'),
-            target = $a.attr('target');
+	// Menu openers.
+	var $menu = $('#menu'),
+		$menu_openers = $menu.children('ul').find('.opener');
 
-        event.preventDefault();
-        event.stopPropagation();
+	$menu_openers.each(function() {
+		var $this = $(this);
 
-        if (!href || href === '#' || href === '') return;
+		$this.on('click', function(event) {
+			event.preventDefault();
 
-        $sidebar.addClass('inactive');
+			$menu_openers.not($this).removeClass('active');
+			$this.toggleClass('active');
 
-        setTimeout(function () {
-            if (target === '_blank') window.open(href);
-            else window.location.href = href;
-        }, 500);
-    });
+			$window.triggerHandler('resize.sidebar-lock');
+		});
+	});
 
-    $sidebar.on('click touchend touchstart touchmove', function (event) {
-        if (breakpoints.active('>large')) return;
-
-        event.stopPropagation();
-    });
-
-    $body.on('click touchend', function (event) {
-        if (breakpoints.active('>large')) return;
-
-        $sidebar.addClass('inactive');
-    });
-
-    $window.on('load.sidebar-lock', function () {
-        var sh, wh, st;
-
-        if ($window.scrollTop() == 1) $window.scrollTop(0);
-
-        $window
-            .on('scroll.sidebar-lock', function () {
-                var x, y;
-
-                if (breakpoints.active('<=large')) {
-                    $sidebar_inner.data('locked', 0).css('position', '').css('top', '');
-                    return;
-                }
-
-                x = Math.max(sh - wh, 0);
-                y = Math.max(0, $window.scrollTop() - x);
-
-                if ($sidebar_inner.data('locked') == 1) {
-                    if (y <= 0)
-                        $sidebar_inner.data('locked', 0).css('position', '').css('top', '');
-                    else $sidebar_inner.css('top', -1 * x);
-                } else {
-                    if (y > 0)
-                        $sidebar_inner.data('locked', 1).css('position', 'fixed').css('top', -1 * x);
-                }
-            })
-            .on('resize.sidebar-lock', function () {
-                wh = $window.height();
-                sh = $sidebar_inner.outerHeight() + 30;
-
-                $window.trigger('scroll.sidebar-lock');
-            })
-            .trigger('resize.sidebar-lock');
-    });
-
-    // Menu functionality.
-    var $menu = $('#menu'),
-        $menu_openers = $menu.children('ul').find('.opener');
-
-    $menu_openers.each(function () {
-        var $this = $(this);
-
-        $this.on('click', function (event) {
-            event.preventDefault();
-
-            $menu_openers.not($this).removeClass('active');
-            $this.toggleClass('active');
-
-            $window.triggerHandler('resize.sidebar-lock');
-        });
-    });
 })(jQuery);
 
-// Lightbox functionality
+// Create the lightbox container
 const lightbox = document.createElement("div");
 lightbox.classList.add("lightbox");
 document.body.appendChild(lightbox);
 
+// Add a close button to the lightbox
 const closeButton = document.createElement("span");
 closeButton.classList.add("close");
 closeButton.innerHTML = "&times;";
 lightbox.appendChild(closeButton);
 
+// Close the lightbox when clicking outside the image or on the close button
 closeButton.addEventListener("click", () => {
-    lightbox.classList.remove("active");
+	lightbox.classList.remove("active");
 });
 
 lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) {
-        lightbox.classList.remove("active");
-    }
+	if (e.target === lightbox) {
+		lightbox.classList.remove("active");
+	}
 });
 
+// Add event listeners to images to open them in the lightbox
 document.querySelectorAll("img").forEach((img) => {
-    img.addEventListener("click", () => {
-        const lightboxImage = document.createElement("img");
-        lightboxImage.src = img.src;
+	img.addEventListener("click", () => {
+		const lightboxImage = document.createElement("img");
+		lightboxImage.src = img.src;
 
-        while (lightbox.childNodes.length > 1) {
-            lightbox.removeChild(lightbox.lastChild);
-        }
+		// Clear previous content in the lightbox
+		while (lightbox.childNodes.length > 1) {
+			lightbox.removeChild(lightbox.lastChild);
+		}
 
-        lightbox.appendChild(lightboxImage);
-        lightbox.classList.add("active");
-    });
+		lightbox.appendChild(lightboxImage);
+		lightbox.classList.add("active");
+	});
 });
 
-console.log("main.js executed successfully.");
+console.log("main.js executed without issues"); // Debugging confirmation
