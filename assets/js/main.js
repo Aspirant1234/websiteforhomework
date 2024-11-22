@@ -311,4 +311,41 @@ images.forEach((img) => {
 lightbox.addEventListener("click", () => {
     lightbox.classList.remove("active");
 });
+// Create a lightbox container
+const lightbox = document.createElement("div");
+lightbox.classList.add("lightbox");
+document.body.appendChild(lightbox);
+
+// Create a close button for the lightbox
+const closeButton = document.createElement("span");
+closeButton.classList.add("close");
+closeButton.innerHTML = "&times;";
+lightbox.appendChild(closeButton);
+
+// Click on the close button or lightbox background to exit
+closeButton.addEventListener("click", () => {
+    lightbox.classList.remove("active");
+});
+
+lightbox.addEventListener("click", (e) => {
+    if (e.target !== lightbox.querySelector("img")) {
+        lightbox.classList.remove("active");
+    }
+});
+
+// Add click event to images for the lightbox
+document.querySelectorAll("img").forEach((img) => {
+    img.addEventListener("click", () => {
+        const lightboxImage = document.createElement("img");
+        lightboxImage.src = img.src;
+
+        // Clear previous image if any
+        while (lightbox.childNodes.length > 1) {
+            lightbox.removeChild(lightbox.lastChild);
+        }
+
+        lightbox.appendChild(lightboxImage);
+        lightbox.classList.add("active");
+    });
+});
 
