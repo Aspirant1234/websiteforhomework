@@ -121,7 +121,7 @@ a {
       color: inherit; }
 
 strong, b {
-  color: #1e90ff;
+  color: #3d4449;
   font-weight: 600; }
 
 em, i {
@@ -131,7 +131,7 @@ p {
   margin: 0 0 2em 0; }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #1e90ff;
+  color: #3d4449;
   font-family: "Roboto Slab", serif;
   font-weight: 700;
   line-height: 1.5;
@@ -1011,7 +1011,7 @@ form {
   margin: 0 0 2em 0; }
 
 label {
-  color: #1e90ff;
+  color: #3d4449;
   display: block;
   font-size: 0.9em;
   font-weight: 600;
@@ -1068,7 +1068,7 @@ select {
   padding-right: 2.75em;
   text-overflow: ellipsis; }
   select option {
-    color: #1e90ff;
+    color: #3d4449;
     background: #ffffff; }
   select:focus::-ms-value {
     background-color: transparent; }
@@ -1139,8 +1139,8 @@ input[type="radio"] {
       width: 2.0625em; }
   input[type="checkbox"]:checked + label:before,
   input[type="radio"]:checked + label:before {
-    background: #1e90ff;
-    border-color: #1e90ff;
+    background: #3d4449;
+    border-color: #3d4449;
     color: #ffffff;
     content: '\f00c'; }
   input[type="checkbox"]:focus + label:before,
@@ -1454,7 +1454,7 @@ table {
   table td {
     padding: 0.75em 0.75em; }
   table th {
-    color: #1e90ff;
+    color: #3d4449;
     font-size: 0.9em;
     font-weight: 600;
     padding: 0 0.75em 0.75em 0.75em;
@@ -2198,7 +2198,7 @@ button,
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  color: #1e90ff;
+  color: #3d4449;
   font-family: "Roboto Slab", serif;
   font-weight: 400;
   letter-spacing: 0.075em;
@@ -2498,23 +2498,7 @@ section {
     cursor: pointer;
 }
 
-/* New Animations */
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-.fade-in {
-    animation: fadeIn 2s ease-in-out;
-}
-
-.button.primary {
-    background-color: #006400;
-    color: #fff;
-    border: none;
-    transition: background-color 0.3s ease;
-}
-
-.button.primary:hover {
-    background-color: #1e90ff;
+body {
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    color: #ffffff;
 }
