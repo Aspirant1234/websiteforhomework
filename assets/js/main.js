@@ -288,3 +288,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const audio = document.getElementById('background-music');
+    audio.muted = false; // Unmute audio
+});
+
