@@ -2578,13 +2578,33 @@ button:focus, .button:focus, .btn:focus {
     color: inherit;  /* Ensure text color remains unaffected */
 }
 
-/* Text color for "Project Gaia" and "Proyecto Gaia" */
+/* Default color for "Project Gaia" and "Proyecto Gaia" */
 .project-gaia, .proyecto-gaia {
-    color: #32CD32;  /* Green text color by default */
-    transition: color 0.3s ease;  /* Smooth transition for hover effect */
+    color: #32CD32;  /* Green color for default state */
+    transition: color 0.3s ease;  /* Smooth transition for color change on hover */
 }
 
-/* Hover effect: text turns blue */
+/* Change color to blue when hovered */
 .project-gaia:hover, .proyecto-gaia:hover {
-    color: #1E90FF;  /* Blue text on hover */
+    color: #1E90FF;  /* Blue color on hover */
+}
+
+/* Styling for the submenu links to make them blue */
+ul li a {
+    color: #1E90FF;  /* Blue color for submenu text */
+    text-decoration: none;
+    transition: color 0.3s ease;  /* Smooth transition for color change */
+}
+
+/* Ensuring buttons are centered */
+button, .more-button, .learn-more-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* Optional: Add hover effect for submenu links */
+ul li a:hover {
+    color: #32CD32;  /* Green color on hover */
 }
