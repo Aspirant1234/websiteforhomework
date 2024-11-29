@@ -2565,3 +2565,26 @@ button:focus, .button:focus, .btn:focus {
 .project-gaia, .proyecto-gaia {
     color: #32CD32;  /* Green color */
 }
+
+/* Remove any unwanted highlight or background effects on text */
+.highlight, .highlighted, .text-highlight, .highlighted-text {
+    background-color: transparent !important;  /* Remove any background highlighting */
+    color: inherit;  /* Ensure text color is inherited from parent styles */
+    box-shadow: none;  /* Remove any box shadow that might be highlighting the text */
+}
+
+.highlight:hover, .highlighted:hover, .text-highlight:hover, .highlighted-text:hover {
+    background-color: transparent;  /* Ensure no background color change on hover */
+    color: inherit;  /* Ensure text color remains unaffected */
+}
+
+/* Text color for "Project Gaia" and "Proyecto Gaia" */
+.project-gaia, .proyecto-gaia {
+    color: #32CD32;  /* Green text color by default */
+    transition: color 0.3s ease;  /* Smooth transition for hover effect */
+}
+
+/* Hover effect: text turns blue */
+.project-gaia:hover, .proyecto-gaia:hover {
+    color: #1E90FF;  /* Blue text on hover */
+}
