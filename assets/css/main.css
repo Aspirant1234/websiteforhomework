@@ -23,7 +23,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block; }
 
-body {
+body { background-color: #1E90FF; color: white;
   line-height: 1; }
 
 ol, ul {
@@ -39,7 +39,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-body {
+body { background-color: #1E90FF; color: white;
   -webkit-text-size-adjust: none; }
 
 mark {
@@ -60,11 +60,11 @@ input, select, textarea {
 @-ms-viewport {
   width: device-width; }
 
-body {
+body { background-color: #1E90FF; color: white;
   -ms-overflow-style: scrollbar; }
 
 @media screen and (max-width: 480px) {
-  html, body {
+  html, body { background-color: #1E90FF; color: white;
     min-width: 320px; } }
 
 html {
@@ -73,7 +73,7 @@ html {
 *, *:before, *:after {
   box-sizing: inherit; }
 
-body {
+body { background-color: #1E90FF; color: white;
   background: #ffffff; }
   body.is-preload *, body.is-preload *:before, body.is-preload *:after, body.is-resizing *, body.is-resizing *:before, body.is-resizing *:after {
     -moz-animation: none !important;
@@ -2494,7 +2494,21 @@ section {
     cursor: pointer;
 }
 
-body {
+body { background-color: #1E90FF; color: white;
     background: linear-gradient(to right, #1e3c72, #2a5298);
     color: #ffffff;
+}
+
+/* Accent colors */
+button, .button, .btn, .highlight {
+    background-color: #32CD32; /* Green */
+    color: white;
+}
+
+a, a:visited {
+    color: #FFFFFF; /* White links */
+}
+
+a:hover {
+    color: #32CD32; /* Green hover effect for links */
 }
