@@ -2517,3 +2517,8 @@ a:hover {
 h1, h2, h3, h4, h5, h6 {
     color: #32CD32; /* Green headings */
 }
+
+/* New class for "Project Gaia" to apply green color */
+.project-gaia {
+    color: #32CD32;
+}
