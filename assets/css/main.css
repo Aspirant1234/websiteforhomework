@@ -2518,7 +2518,21 @@ h1, h2, h3, h4, h5, h6 {
     color: #32CD32; /* Green headings */
 }
 
-/* New class for "Project Gaia" to apply green color */
-.project-gaia {
-    color: #32CD32;
+/* Buttons: white background, blue text, blue outline */
+button, .button, .btn {
+    background-color: white;
+    color: #1E90FF;  /* Blue text color */
+    border: 2px solid #1E90FF;  /* Blue outline */
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+button:hover, .button:hover, .btn:hover {
+    background-color: #1E90FF;
+    color: white;  /* Change text color to white when hovered */
+}
+
+/* Target "Project Gaia" and "Proyecto Gaia" with green color */
+.project-gaia, .proyecto-gaia {
+    color: #32CD32;  /* Green color */
 }
