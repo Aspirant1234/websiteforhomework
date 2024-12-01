@@ -2502,7 +2502,7 @@ body { background-color: #F4F4F4; color: #333333;
 /* Accent colors */
 button, .button, .btn, .highlight {
     background-color: #1E90FF; /* Blue */
-    color: white;
+    color: red;
 }
 
 a, a:visited {
