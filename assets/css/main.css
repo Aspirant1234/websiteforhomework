@@ -2936,4 +2936,49 @@ ul li a:hover {
   aspect-ratio: 16 / 9 !important; /* Enforce 16:9 aspect ratio */
   display: block !important; /* Ensure the iframe is block-level */
 }
+/* Container for the videos */
+.video-container {
+  display: flex;
+  justify-content: space-between; /* Space videos evenly */
+  align-items: flex-start; /* Align videos to the top */
+  width: 90%; /* Constrain the total container width */
+  margin: 0 auto; /* Center the container on the page */
+  max-width: 1200px; /* Restrict maximum container width */
+  gap: 30px; /* Add spacing between videos */
+}
+
+/* Each video block */
+.video {
+  flex: 1; /* Allow videos to grow equally */
+  max-width: 48%; /* Restrict each video to 48% of the container */
+  text-align: center; /* Center-align text below the video */
+}
+
+/* Style for the iframe (video itself) */
+.video iframe {
+  width: 560px; /* Explicit width for the video */
+  height: 315px; /* Explicit height to maintain 16:9 ratio */
+  max-width: 100%; /* Ensure responsiveness */
+  display: block; /* Remove inline-block spacing issues */
+  margin: 0 auto; /* Center the iframe */
+}
+
+/* Adjustments for smaller screens (e.g., tablets) */
+@media screen and (max-width: 1024px) {
+  .video iframe {
+    width: 480px; /* Slightly smaller width for tablets */
+    height: 270px; /* Maintain 16:9 ratio */
+  }
+}
+
+/* Adjustments for mobile screens */
+@media screen and (max-width: 768px) {
+  .video-container {
+    flex-direction: column; /* Stack videos vertically */
+    align-items: center; /* Center-align stacked videos */
+  }
+
+  .video iframe {
+    width: 100%; /* 
+
 
