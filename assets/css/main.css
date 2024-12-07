@@ -2929,3 +2929,11 @@ ul li a:hover {
   aspect-ratio: 16 / 9 !important; /* Enforce 16:9 aspect ratio */
   display: block !important; /* Ensure the iframe is block-level */
 }
+.video iframe {
+  width: 100% !important; /* Force full width of the parent container */
+  max-width: 100% !important; /* Ensure no restriction on width */
+  height: auto !important; /* Maintain aspect ratio */
+  aspect-ratio: 16 / 9 !important; /* Enforce 16:9 aspect ratio */
+  display: block !important; /* Ensure the iframe is block-level */
+}
+
