@@ -2608,3 +2608,35 @@ button, .more-button, .learn-more-button {
 ul li a:hover {
     color: #32CD32;  /* Green color on hover */
 }
+
+
+/* Video Container Styling */
+.video-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px; /* Add spacing between the videos */
+  margin: 20px 0; /* Optional margin */
+}
+
+.video-container .video {
+  flex: 1; /* Make each video take equal space */
+  max-width: 48%; /* Ensure the videos don't exceed their parent container */
+}
+
+.video-container iframe {
+  width: 100%; /* Make iframe responsive */
+  height: auto; /* Maintain aspect ratio */
+  aspect-ratio: 16 / 9; /* Set aspect ratio explicitly */
+}
+
+@media screen and (max-width: 768px) {
+  .video-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .video-container .video {
+    max-width: 100%; /* Take full width on smaller screens */
+  }
+}
