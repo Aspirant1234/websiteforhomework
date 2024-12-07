@@ -2712,3 +2712,41 @@ ul li a:hover {
     max-width: 100%;
   }
 }
+/* Container for the videos */
+.video-container {
+  display: flex;
+  justify-content: center; /* Center-align the entire video block */
+  align-items: flex-start;
+  gap: 20px; /* Space between the videos */
+  margin: 20px 0;
+}
+
+/* Each video block */
+.video {
+  flex: 0 1 48%; /* Ensure videos take up equal width */
+  max-width: 48%; /* Prevent them from exceeding 48% of the container width */
+  text-align: center; /* Center-align text below each video */
+}
+
+/* Style for the iframe (video itself) */
+.video iframe {
+  width: 100%; /* Full width of the parent container */
+  height: auto; /* Maintain aspect ratio */
+  aspect-ratio: 16 / 9; /* Explicitly define aspect ratio */
+  display: block;
+  margin: 0 auto; /* Center the iframe horizontally */
+}
+
+/* Adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+  .video-container {
+    flex-direction: column; /* Stack videos vertically */
+    align-items: center; /* Center-align items */
+  }
+
+  .video {
+    max-width: 100%; /* Full width on smaller screens */
+    margin-bottom: 20px; /* Add spacing between stacked videos */
+  }
+}
+
