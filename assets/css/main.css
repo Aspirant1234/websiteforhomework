@@ -2675,3 +2675,40 @@ ul li a:hover {
     max-width: 100%; /* Videos take full width in smaller screens */
   }
 }
+/* Container for the videos */
+.video-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px; /* Space between videos */
+  margin: 20px 0;
+}
+
+/* Each video block */
+.video {
+  flex: 1;
+  max-width: 48%; /* Ensure videos are side by side */
+  text-align: center; /* Center-align text below the videos */
+}
+
+/* Style for the iframe (video itself) */
+.video iframe {
+  width: 100%; /* Full width of the parent container */
+  height: auto; /* Maintain aspect ratio */
+  min-height: 315px; /* Minimum height to avoid being too small */
+  aspect-ratio: 16 / 9;
+  display: block;
+  margin: 0 auto;
+  background-color: #000; /* Optional: Adds a background to the iframe */
+}
+
+@media screen and (max-width: 768px) {
+  .video-container {
+    flex-direction: column; /* Stack videos vertically on smaller screens */
+    align-items: center;
+  }
+
+  .video {
+    max-width: 100%;
+  }
+}
