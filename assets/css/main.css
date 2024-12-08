@@ -3129,4 +3129,28 @@ ul li a:hover {
     width: 100%;
   }
 }
+.video iframe {
+  width: 100%; /* Occupy full width of the parent container */
+  height: 400px; /* Match the height of the images */
+  max-width: 700px; /* Prevent videos from growing too wide */
+  display: block; /* Block layout for consistent alignment */
+  margin: 0 auto; /* Center the video */
+  border-radius: 8px; /* Optional: Add rounded corners */
+}
+
+.video-container {
+  display: flex;
+  justify-content: space-between; /* Space videos evenly */
+  align-items: center; /* Align videos horizontally */
+  gap: 40px; /* Space between videos */
+  max-width: 1200px; /* Restrict overall container width */
+  margin: 0 auto; /* Center-align container */
+  padding: 20px 0; /* Add vertical padding */
+}
+
+.video {
+  flex: 1; /* Allow videos to grow/shrink equally */
+  max-width: 45%; /* Set a consistent size for video blocks */
+  text-align: center; /* Center-align video titles and descriptions */
+}
 
