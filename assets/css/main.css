@@ -3083,4 +3083,50 @@ ul li a:hover {
     flex-direction: column; /* Stack videos vertically */
     align-items: center; /* Center-alig
 
+.video-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.video {
+  flex: 1;
+  max-width: 45%;
+  text-align: center;
+}
+
+.video iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  display: block;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1024px) {
+  .video-container {
+    gap: 20px;
+  }
+  .video {
+    max-width: 48%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .video-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .video {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+  .video iframe {
+    width: 100%;
+  }
+}
 
