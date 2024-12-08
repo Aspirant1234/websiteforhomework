@@ -3040,5 +3040,47 @@ ul li a:hover {
     height: auto; /* Adjust height automatically */
   }
 }
+/* Container for the videos */
+.video-container {
+  display: flex;
+  justify-content: space-around; /* Center and evenly space videos */
+  align-items: flex-start; /* Align videos to the top */
+  gap: 40px; /* Add consistent spacing between videos */
+  max-width: 1200px; /* Restrict container width for larger screens */
+  margin: 0 auto; /* Center container horizontally */
+  padding: 20px 0; /* Add spacing around the container */
+}
+
+/* Each video block */
+.video {
+  flex: 1; /* Allow videos to grow/shrink equally */
+  max-width: 48%; /* Restrict each video to 48% of the container */
+  text-align: center; /* Center-align text below the video */
+}
+
+/* Style for the iframe (video itself) */
+.video iframe {
+  width: 100%; /* Full width of the parent container */
+  height: auto; /* Maintain aspect ratio */
+  aspect-ratio: 16 / 9; /* Enforce proportional dimensions */
+  display: block; /* Ensure iframe behaves like a block element */
+}
+
+/* Adjustments for tablets (medium screens) */
+@media screen and (max-width: 1024px) {
+  .video-container {
+    gap: 20px; /* Reduce spacing between videos */
+  }
+
+  .video {
+    max-width: 48%; /* Keep side-by-side layout for tablets */
+  }
+}
+
+/* Adjustments for mobile screens */
+@media screen and (max-width: 768px) {
+  .video-container {
+    flex-direction: column; /* Stack videos vertically */
+    align-items: center; /* Center-alig
 
 
