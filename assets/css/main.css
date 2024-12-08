@@ -3153,4 +3153,31 @@ ul li a:hover {
   max-width: 45%; /* Set a consistent size for video blocks */
   text-align: center; /* Center-align video titles and descriptions */
 }
+/* Adjust video dimensions to match large images */
+.video iframe {
+  width: 100%; /* Occupy full width of the container */
+  height: 300px; /* Set a proportional height */
+  max-width: 700px; /* Prevent excessive width */
+  margin: 0 auto; /* Center the video */
+  display: block; /* Ensure block alignment */
+  border-radius: 8px; /* Optional: Add rounded corners for visuals */
+}
+
+/* Container alignment for videos */
+.video-container {
+  display: flex;
+  justify-content: space-between; /* Space out videos */
+  align-items: flex-start; /* Align to top */
+  gap: 40px; /* Space between videos */
+  max-width: 1200px; /* Restrict container width */
+  margin: 0 auto; /* Center-align container */
+  padding: 20px 0; /* Add vertical spacing */
+}
+
+/* Ensure video blocks have symmetry with images */
+.video {
+  flex: 1; /* Equal scaling */
+  max-width: 50%; /* Match half the container width */
+  text-align: center; /* Center-align text */
+}
 
